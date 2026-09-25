@@ -1,14 +1,8 @@
-# RAGAI — AI-Powered RAG Knowledge Assistant
-
+RAGAI — AI-Powered RAG Knowledge Assistant
 RAGAI is a full-stack AI-powered knowledge assistant that allows users to upload documents, build a personal knowledge base, and interact with their documents through Retrieval-Augmented Generation (RAG).
-
 The application provides a modern SaaS-style interface with authentication, document management, AI conversations, analytics, profiles, settings, notifications, and complete dark/light mode support.
-
----
-
-## ✨ Features
-
-### 🔐 Authentication
+✨ Features
+🔐 Authentication
 - User registration
 - User login
 - JWT-based authentication
@@ -17,8 +11,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Authenticated API requests
 - Automatic unauthorized-session handling
 - Secure password validation
-
-### 📚 Document Management
+📚 Document Management
 - Upload documents
 - View documents
 - Search documents
@@ -31,8 +24,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Delete documents
 - Loading and empty states
 - Responsive document interface
-
-### 🤖 AI-Powered RAG Chat
+🤖 AI-Powered RAG Chat
 - AI-powered conversations
 - Retrieval-Augmented Generation
 - Document-based question answering
@@ -43,8 +35,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Multiple conversations
 - Document-specific retrieval
 - Search across available documents
-
-### 📊 Dashboard
+📊 Dashboard
 - Total documents
 - Knowledge chunks
 - AI conversations
@@ -62,8 +53,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - RAG performance information
 - AI assistant section
 - Quick actions
-
-### 📈 Analytics
+📈 Analytics
 - RAG request history
 - Success and failure tracking
 - Retrieval quality metrics
@@ -75,8 +65,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Analytics insights
 - Evaluation summaries
 - Refreshable analytics data
-
-### 👤 Profile
+👤 Profile
 - User name
 - Email
 - User ID
@@ -84,16 +73,14 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Account creation date
 - Last updated information
 - Account activity information
-
-### ⚙️ Settings
+⚙️ Settings
 - Theme preferences
 - Dark mode
 - Light mode
 - Account information
 - Security information
 - Quick navigation
-
-### 🔔 Notifications
+🔔 Notifications
 - Notification center
 - Unread notification count
 - Individual notification actions
@@ -101,57 +88,19 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Mark all notifications as read
 - Automatic notification refresh
 - Responsive mobile notifications
-
-### 🌙 Dark & Light Mode
-
+🌙 Dark & Light Mode
 The entire application supports:
-
 - ☀️ Light mode
 - 🌙 Dark mode
-
-Theme support is available across:
-
-- Landing page
-- Authentication pages
-- Dashboard
-- Documents
-- Document details
-- AI Chat
-- Analytics
-- Profile
-- Settings
-- Navigation
-- Modals
-- Cards
-- Forms
-- Notifications
-
-### 📱 Responsive Design
-
+Theme support is available across the landing page, authentication pages, dashboard, documents, document details, AI Chat, analytics, profile, settings, navigation, modals, cards, forms, and notifications.
+📱 Responsive Design
 RAGAI is designed for:
-
 - 💻 Desktop
 - 💻 Laptop
 - 📱 Tablet
 - 📱 Mobile
-
-The responsive interface includes:
-
-- Mobile navigation
-- Responsive dashboard
-- Responsive document layouts
-- Mobile chat interface
-- Responsive analytics
-- Mobile profile
-- Mobile settings
-- Responsive notifications
-
----
-
-# 🛠️ Technology Stack
-
-## Frontend
-
+🛠️ Technology Stack
+Frontend
 - React
 - Vite
 - React Router
@@ -160,9 +109,7 @@ The responsive interface includes:
 - CSS
 - Responsive design
 - Dark/Light theme system
-
-## Backend
-
+Backend
 - Python
 - FastAPI
 - SQLAlchemy
@@ -170,28 +117,19 @@ The responsive interface includes:
 - Pydantic
 - JWT Authentication
 - Uvicorn
-
-## AI / RAG
-
+AI / RAG
 - Retrieval-Augmented Generation
 - Google Gemini API
 - Document processing
 - Text chunking
 - Vector-based retrieval
 - Similarity-based retrieval
-
-## Development
-
+Development
 - Git
 - GitHub
 - VS Code
 - Swagger / OpenAPI
-
----
-
-# 🏗️ System Architecture
-
-``
+🏗️ System Architecture
                          ┌─────────────────────┐
                          │        User         │
                          └──────────┬──────────┘
@@ -231,22 +169,18 @@ ai-rag-knowledge-assistant/
 │   │   ├── core/
 │   │   │   ├── config.py
 │   │   │   └── security.py
-│   │   │
 │   │   ├── db/
 │   │   │   └── database.py
-│   │   │
 │   │   ├── models/
 │   │   ├── routers/
 │   │   ├── schemas/
 │   │   ├── services/
 │   │   └── main.py
-│   │
 │   ├── requirements.txt
 │   └── .env
 │
 ├── frontend/
 │   ├── public/
-│   │
 │   ├── src/
 │   │   ├── components/
 │   │   ├── context/
@@ -255,7 +189,6 @@ ai-rag-knowledge-assistant/
 │   │   ├── routes/
 │   │   ├── services/
 │   │   └── utils/
-│   │
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── vite.config.js
@@ -275,7 +208,6 @@ cd backend
 3. Create Virtual Environment
 Windows
 python -m venv venv
-Activate:
 .\venv\Scripts\Activate.ps1
 macOS / Linux
 python3 -m venv venv
@@ -283,8 +215,7 @@ source venv/bin/activate
 4. Install Dependencies
 pip install -r requirements.txt
 5. Configure Backend Environment
-Create:
-backend/.env
+Create backend/.env.
 Example:
 DATABASE_URL=your_postgresql_database_url
 
@@ -300,31 +231,25 @@ APP_VERSION=1.0.0
 ENVIRONMENT=development
 
 FRONTEND_URL=http://localhost:5173
-
 CORS_ORIGINS=http://localhost:5173
-
 AUTO_CREATE_TABLES=true
 ⚠️ Never commit .env files or expose database credentials, JWT secrets, or API keys.
 
 6. Start Backend
 From the backend directory:
 uvicorn app.main:app --reload
-Backend:
-http://127.0.0.1:8000
+Backend: http://127.0.0.1:8000
 ⚛️ Frontend Setup
 Open a second terminal.
 cd frontend
 7. Install Dependencies
 npm install
 8. Configure Frontend Environment
-Create:
-frontend/.env
-Example:
+Create frontend/.env.
 VITE_API_BASE_URL=http://127.0.0.1:8000
 9. Start Frontend
 npm run dev
-Frontend:
-http://localhost:5173
+Frontend: http://localhost:5173
 🔗 Application URLs
 Service	URL
 Frontend	http://localhost:5173
@@ -421,4 +346,4 @@ GitHub
 https://github.com/yashbora18
 📄 License
 This project currently does not specify an open-source license.
-A license can be added when the project is ready for open-source distribution
+A license can be added when the project is ready for open-source distribution.
