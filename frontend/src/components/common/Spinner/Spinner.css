@@ -1,0 +1,38 @@
+.spinner-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: var(--text-secondary);
+}
+
+.spinner-icon {
+  flex-shrink: 0;
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+.spinner-label {
+  font-size: 13px;
+}
+
+.spinner-small .spinner-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.spinner-medium .spinner-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.spinner-large .spinner-icon {
+  width: 32px;
+  height: 32px;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

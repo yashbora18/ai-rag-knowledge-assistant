@@ -1,0 +1,110 @@
+.app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  user-select: none;
+}
+
+.app-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.app-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.app-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Variants */
+
+.app-button-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-button-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.app-button-secondary {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.app-button-secondary:hover:not(:disabled) {
+  background: var(--surface-secondary);
+  border-color: var(--border-hover);
+}
+
+.app-button-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.app-button-ghost:hover:not(:disabled) {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.app-button-danger {
+  background: var(--error);
+  color: #ffffff;
+}
+
+.app-button-danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* Sizes */
+
+.app-button-small {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.app-button-medium {
+  min-height: 42px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.app-button-large {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+/* Loading */
+
+.button-spinner {
+  animation: button-spin 0.8s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

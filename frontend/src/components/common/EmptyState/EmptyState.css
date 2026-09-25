@@ -1,0 +1,49 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 260px;
+  padding: 32px;
+
+  text-align: center;
+}
+
+.empty-state-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+  margin-bottom: 18px;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--surface-secondary);
+  color: var(--primary);
+}
+
+.empty-state-title {
+  margin-bottom: 8px;
+
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.empty-state-description {
+  max-width: 420px;
+  margin-bottom: 20px;
+
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.empty-state-action {
+  display: flex;
+  justify-content: center;
+}
