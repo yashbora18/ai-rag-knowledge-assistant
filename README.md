@@ -2,6 +2,7 @@ RAGAI — AI-Powered RAG Knowledge Assistant
 RAGAI is a full-stack AI-powered knowledge assistant that allows users to upload documents, build a personal knowledge base, and interact with their documents through Retrieval-Augmented Generation (RAG).
 The application provides a modern SaaS-style interface with authentication, document management, AI conversations, analytics, profiles, settings, notifications, and complete dark/light mode support.
 ✨ Features
+
 🔐 Authentication
 - User registration
 - User login
@@ -11,6 +12,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Authenticated API requests
 - Automatic unauthorized-session handling
 - Secure password validation
+
 📚 Document Management
 - Upload documents
 - View documents
@@ -24,6 +26,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Delete documents
 - Loading and empty states
 - Responsive document interface
+
 🤖 AI-Powered RAG Chat
 - AI-powered conversations
 - Retrieval-Augmented Generation
@@ -35,6 +38,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Multiple conversations
 - Document-specific retrieval
 - Search across available documents
+
 📊 Dashboard
 - Total documents
 - Knowledge chunks
@@ -53,6 +57,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - RAG performance information
 - AI assistant section
 - Quick actions
+
 📈 Analytics
 - RAG request history
 - Success and failure tracking
@@ -65,6 +70,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Analytics insights
 - Evaluation summaries
 - Refreshable analytics data
+
 👤 Profile
 - User name
 - Email
@@ -73,6 +79,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Account creation date
 - Last updated information
 - Account activity information
+
 ⚙️ Settings
 - Theme preferences
 - Dark mode
@@ -80,6 +87,7 @@ The application provides a modern SaaS-style interface with authentication, docu
 - Account information
 - Security information
 - Quick navigation
+
 🔔 Notifications
 - Notification center
 - Unread notification count
@@ -93,12 +101,14 @@ The entire application supports:
 - ☀️ Light mode
 - 🌙 Dark mode
 Theme support is available across the landing page, authentication pages, dashboard, documents, document details, AI Chat, analytics, profile, settings, navigation, modals, cards, forms, and notifications.
+
 📱 Responsive Design
 RAGAI is designed for:
 - 💻 Desktop
 - 💻 Laptop
 - 📱 Tablet
 - 📱 Mobile
+
 🛠️ Technology Stack
 Frontend
 - React
@@ -129,6 +139,7 @@ Development
 - GitHub
 - VS Code
 - Swagger / OpenAPI
+
 🏗️ System Architecture
                          ┌─────────────────────┐
                          │        User         │
@@ -162,6 +173,7 @@ Development
                             │ Knowledge Base   │
                             └──────────────────┘
 📁 Project Structure
+
 ai-rag-knowledge-assistant/
 │
 ├── backend/
@@ -196,15 +208,17 @@ ai-rag-knowledge-assistant/
 │
 ├── .gitignore
 └── README.md
-Note: .env files are local configuration files and are excluded from Git using .gitignore.
 
 ⚙️ Local Development Setup
 1. Clone the Repository
+
 git clone https://github.com/yashbora18/ai-rag-knowledge-assistant.git
 cd ai-rag-knowledge-assistant
+
 🐍 Backend Setup
 2. Open Backend Directory
 cd backend
+
 3. Create Virtual Environment
 Windows
 python -m venv venv
@@ -212,8 +226,10 @@ python -m venv venv
 macOS / Linux
 python3 -m venv venv
 source venv/bin/activate
+
 4. Install Dependencies
 pip install -r requirements.txt
+
 5. Configure Backend Environment
 Create backend/.env.
 Example:
@@ -242,14 +258,18 @@ Backend: http://127.0.0.1:8000
 ⚛️ Frontend Setup
 Open a second terminal.
 cd frontend
+
 7. Install Dependencies
 npm install
+
 8. Configure Frontend Environment
 Create frontend/.env.
 VITE_API_BASE_URL=http://127.0.0.1:8000
+
 9. Start Frontend
 npm run dev
 Frontend: http://localhost:5173
+
 🔗 Application URLs
 Service	URL
 Frontend	http://localhost:5173
@@ -286,6 +306,7 @@ Sensitive values include:
 - JWT secrets
 - Gemini API keys
 - Production credentials
+
 🧪 Project Verification
 The project has been verified locally.
 Frontend Verification
@@ -306,12 +327,14 @@ The backend has been verified for:
 - Protected API endpoints
 - Frontend/backend communication
 - CORS
+
 Health Endpoint
 GET /health
 Example response:
 {
   "status": "healthy"
 }
+
 🚀 Deployment
 RAGAI is currently not deployed to production.
 The project is currently configured and verified for local development.
@@ -326,6 +349,7 @@ Future production deployment will require:
 - Gemini API configuration
 - HTTPS
 Production deployment will be configured separately when deployment begins.
+
 🔮 Future Improvements
 Potential future improvements include:
 - Production deployment
@@ -339,11 +363,14 @@ Potential future improvements include:
 - Additional AI providers
 - CI/CD pipeline
 - Advanced vector database optimization
+
 👨‍💻 Author
 Yash Bora
 Computer Science & Engineering
+
 GitHub
 https://github.com/yashbora18
+
 📄 License
 This project currently does not specify an open-source license.
 A license can be added when the project is ready for open-source distribution.
