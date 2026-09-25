@@ -191,7 +191,7 @@ The responsive interface includes:
 
 # 🏗️ System Architecture
 
---
+``
                          ┌─────────────────────┐
                          │        User         │
                          └──────────┬──────────┘
@@ -269,12 +269,10 @@ Note: .env files are local configuration files and are excluded from Git using .
 1. Clone the Repository
 git clone https://github.com/yashbora18/ai-rag-knowledge-assistant.git
 cd ai-rag-knowledge-assistant
-
 🐍 Backend Setup
-3. Open Backend Directory
+2. Open Backend Directory
 cd backend
-4. Create Virtual Environment
-
+3. Create Virtual Environment
 Windows
 python -m venv venv
 Activate:
@@ -282,11 +280,9 @@ Activate:
 macOS / Linux
 python3 -m venv venv
 source venv/bin/activate
-
-5. Install Dependencies
+4. Install Dependencies
 pip install -r requirements.txt
-
-6. Configure Backend Environment
+5. Configure Backend Environment
 Create:
 backend/.env
 Example:
@@ -310,7 +306,7 @@ CORS_ORIGINS=http://localhost:5173
 AUTO_CREATE_TABLES=true
 ⚠️ Never commit .env files or expose database credentials, JWT secrets, or API keys.
 
-7. Start Backend
+6. Start Backend
 From the backend directory:
 uvicorn app.main:app --reload
 Backend:
@@ -318,21 +314,17 @@ http://127.0.0.1:8000
 ⚛️ Frontend Setup
 Open a second terminal.
 cd frontend
-
-8. Install Dependencies
+7. Install Dependencies
 npm install
-
-10. Configure Frontend Environment
+8. Configure Frontend Environment
 Create:
 frontend/.env
 Example:
 VITE_API_BASE_URL=http://127.0.0.1:8000
-
-12. Start Frontend
+9. Start Frontend
 npm run dev
 Frontend:
 http://localhost:5173
-
 🔗 Application URLs
 Service	URL
 Frontend	http://localhost:5173
@@ -340,6 +332,7 @@ Backend	http://127.0.0.1:8000
 Swagger API Docs	http://127.0.0.1:8000/docs
 OpenAPI Schema	http://127.0.0.1:8000/openapi.json
 Health Check	http://127.0.0.1:8000/health
+
 
 📡 API
 RAGAI provides REST APIs using FastAPI.
@@ -349,7 +342,6 @@ OpenAPI Schema
 http://127.0.0.1:8000/openapi.json
 Authenticated requests use:
 Authorization: Bearer <access_token>
-
 🔐 Security
 RAGAI includes:
 - JWT authentication
@@ -369,7 +361,6 @@ Sensitive values include:
 - JWT secrets
 - Gemini API keys
 - Production credentials
-- 
 🧪 Project Verification
 The project has been verified locally.
 Frontend Verification
@@ -395,7 +386,6 @@ GET /health
 Example response:
 {
   "status": "healthy"
-
 }
 🚀 Deployment
 RAGAI is currently not deployed to production.
@@ -411,7 +401,6 @@ Future production deployment will require:
 - Gemini API configuration
 - HTTPS
 Production deployment will be configured separately when deployment begins.
-
 🔮 Future Improvements
 Potential future improvements include:
 - Production deployment
@@ -425,13 +414,11 @@ Potential future improvements include:
 - Additional AI providers
 - CI/CD pipeline
 - Advanced vector database optimization
-- 
 👨‍💻 Author
 Yash Bora
 Computer Science & Engineering
 GitHub
 https://github.com/yashbora18
-
 📄 License
 This project currently does not specify an open-source license.
-A license can be added when the project is ready for open-source distribution.
+A license can be added when the project is ready for open-source distribution
