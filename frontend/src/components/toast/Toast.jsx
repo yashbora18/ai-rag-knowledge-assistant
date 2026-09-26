@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   CheckCircle2,
   AlertCircle,
@@ -37,15 +37,25 @@ function Toast({
   const config = toastConfig[type] || toastConfig.info;
   const Icon = config.icon;
 
+  // Always keep the latest onClose callback
+  const onCloseRef = useRef(onClose);
+
   useEffect(() => {
-    if (!duration) return;
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  // Auto-dismiss
+  useEffect(() => {
+    if (!duration || duration <= 0) return;
 
     const timer = setTimeout(() => {
-      onClose?.();
+      onCloseRef.current?.();
     }, duration);
 
-    return () => clearTimeout(timer);
-  }, [duration, onClose]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [duration]);
 
   return (
     <div
@@ -70,7 +80,7 @@ function Toast({
       <button
         type="button"
         className="toast-close"
-        onClick={onClose}
+        onClick={() => onCloseRef.current?.()}
         aria-label="Close notification"
       >
         <X size={17} />
