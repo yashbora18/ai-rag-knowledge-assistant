@@ -27,32 +27,20 @@ def get_embedding_model():
     )
 
 
-def generate_document_embedding(
-    text: str,
+def _normalize_embedding(
+    embedding,
 ) -> list[float]:
     """
-    Generate a 384-dimensional normalized embedding
-    for a document chunk or query.
+    Convert an embedding to a normalized Python list.
     """
-
-    if not text or not text.strip():
-        raise ValueError(
-            "Cannot generate an embedding for empty text."
-        )
-
-    model = get_embedding_model()
-
-    embedding = next(
-        model.embed(
-            [text],
-            batch_size=1,
-        )
-    )
 
     embedding_list = embedding.tolist()
 
     magnitude = sqrt(
-        sum(value * value for value in embedding_list)
+        sum(
+            value * value
+            for value in embedding_list
+        )
     )
 
     if magnitude > 0:
@@ -69,3 +57,72 @@ def generate_document_embedding(
         )
 
     return embedding_list
+
+
+def generate_document_embeddings(
+    texts: list[str],
+    batch_size: int = 8,
+) -> list[list[float]]:
+    """
+    Generate normalized embeddings for multiple texts.
+
+    Embeddings are generated in small batches to keep memory
+    usage low on small deployment instances such as Render.
+    """
+
+    if not texts:
+        return []
+
+    cleaned_texts = [
+        text.strip()
+        for text in texts
+        if text and text.strip()
+    ]
+
+    if not cleaned_texts:
+        return []
+
+    if batch_size <= 0:
+        raise ValueError(
+            "batch_size must be greater than 0."
+        )
+
+    model = get_embedding_model()
+
+    embeddings = model.embed(
+        cleaned_texts,
+        batch_size=batch_size,
+    )
+
+    return [
+        _normalize_embedding(embedding)
+        for embedding in embeddings
+    ]
+
+
+def generate_document_embedding(
+    text: str,
+) -> list[float]:
+    """
+    Generate a single normalized embedding.
+
+    This function is kept for compatibility with existing
+    search/query code.
+    """
+
+    if not text or not text.strip():
+        raise ValueError(
+            "Cannot generate an embedding for empty text."
+        )
+
+    embeddings = generate_document_embeddings(
+        [text],
+        batch_size=1,
+    )
+
+    if not embeddings:
+        raise RuntimeError(
+            "Failed to generate document embedding."
+        )
+
+    return embeddings[0]
