@@ -8,12 +8,15 @@ from urllib.request import Request, urlopen
 # Gemini configuration
 # ---------------------------------------------------------
 
-GEMINI_API_URL = (
-    "https://generativelanguage.googleapis.com/"
-    "v1beta/models/gemini-2.5-flash:generateContent"
+MODEL_NAME = os.getenv(
+    "GEMINI_MODEL",
+    "gemini-3.8-flash",
 )
 
-MODEL_NAME = "gemini-2.5-flash"
+GEMINI_API_URL = (
+    "https://generativelanguage.googleapis.com/"
+    f"v1beta/models/{MODEL_NAME}:generateContent"
+)
 
 
 # ---------------------------------------------------------
