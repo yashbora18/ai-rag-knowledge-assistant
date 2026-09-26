@@ -1,4 +1,5 @@
 from functools import lru_cache
+from math import sqrt
 
 
 EMBEDDING_MODEL_NAME = (
@@ -11,17 +12,18 @@ EMBEDDING_DIMENSION = 384
 @lru_cache(maxsize=1)
 def get_embedding_model():
     """
-    Load the embedding model lazily.
+    Load the FastEmbed model lazily.
 
-    The model is loaded only when an embedding
-    is actually required, instead of during
-    application startup.
+    FastEmbed uses ONNX Runtime instead of the
+    PyTorch/SentenceTransformers runtime, which keeps
+    memory usage much lower on small deployment instances.
     """
 
-    from sentence_transformers import SentenceTransformer
+    from fastembed import TextEmbedding
 
-    return SentenceTransformer(
-        EMBEDDING_MODEL_NAME
+    return TextEmbedding(
+        model_name=EMBEDDING_MODEL_NAME,
+        threads=1,
     )
 
 
@@ -29,7 +31,7 @@ def generate_document_embedding(
     text: str,
 ) -> list[float]:
     """
-    Generate a 384-dimensional embedding
+    Generate a 384-dimensional normalized embedding
     for a document chunk or query.
     """
 
@@ -40,12 +42,24 @@ def generate_document_embedding(
 
     model = get_embedding_model()
 
-    embedding = model.encode(
-        text,
-        normalize_embeddings=True,
+    embedding = next(
+        model.embed(
+            [text],
+            batch_size=1,
+        )
     )
 
     embedding_list = embedding.tolist()
+
+    magnitude = sqrt(
+        sum(value * value for value in embedding_list)
+    )
+
+    if magnitude > 0:
+        embedding_list = [
+            value / magnitude
+            for value in embedding_list
+        ]
 
     if len(embedding_list) != EMBEDDING_DIMENSION:
         raise RuntimeError(

@@ -39,7 +39,6 @@ def create_document_chunks(
     for index, chunk_content in enumerate(
         chunks
     ):
-        # Generate a 384-dimensional local embedding.
         embedding = generate_document_embedding(
             chunk_content
         )
