@@ -1,21 +1,31 @@
 import json
+import os
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-OLLAMA_URL = (
-    "http://localhost:11434/api/generate"
+# ---------------------------------------------------------
+# Gemini configuration
+# ---------------------------------------------------------
+
+GEMINI_API_URL = (
+    "https://generativelanguage.googleapis.com/"
+    "v1beta/models/gemini-2.5-flash:generateContent"
 )
 
-MODEL_NAME = "llama3.2:3b"
+MODEL_NAME = "gemini-2.5-flash"
 
+
+# ---------------------------------------------------------
+# Generate grounded RAG answer
+# ---------------------------------------------------------
 
 def generate_rag_answer(
     question: str,
     retrieved_chunks: list[dict],
 ) -> str:
     """
-    Generate a grounded answer using the local Ollama model.
+    Generate a grounded answer using Google Gemini.
 
     The model receives only the retrieved document chunks
     as context and must not rely on outside knowledge.
@@ -32,6 +42,20 @@ def generate_rag_answer(
             "in your uploaded documents."
         )
 
+    api_key = os.getenv(
+        "GEMINI_API_KEY",
+        "",
+    ).strip()
+
+    if not api_key:
+        raise RuntimeError(
+            "GEMINI_API_KEY is not configured on the backend."
+        )
+
+    # -----------------------------------------------------
+    # Build document context
+    # -----------------------------------------------------
+
     context_parts = []
 
     for index, chunk in enumerate(
@@ -43,6 +67,7 @@ def generate_rag_answer(
 SOURCE {index}
 Document ID: {chunk["document_id"]}
 Chunk ID: {chunk["chunk_id"]}
+Chunk Index: {chunk.get("chunk_index", 0)}
 Similarity: {chunk.get("similarity", 0)}
 
 {chunk["content"]}
@@ -52,6 +77,10 @@ Similarity: {chunk.get("similarity", 0)}
     context = "\n\n---\n\n".join(
         context_parts
     )
+
+    # -----------------------------------------------------
+    # Grounded RAG prompt
+    # -----------------------------------------------------
 
     prompt = f"""
 You are a grounded AI knowledge assistant.
@@ -101,31 +130,49 @@ USER QUESTION:
 ANSWER:
 """.strip()
 
+    # -----------------------------------------------------
+    # Gemini request
+    # -----------------------------------------------------
+
     payload = {
-        "model": MODEL_NAME,
-        "prompt": prompt,
-        "stream": False,
-        "options": {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": prompt
+                    }
+                ],
+            }
+        ],
+        "generationConfig": {
             "temperature": 0.1,
+            "maxOutputTokens": 2048,
         },
     }
 
     request = Request(
-        OLLAMA_URL,
+        GEMINI_API_URL,
         data=json.dumps(
             payload
         ).encode("utf-8"),
         headers={
             "Content-Type": "application/json",
+            "x-goog-api-key": api_key,
         },
         method="POST",
     )
+
+    # -----------------------------------------------------
+    # Call Gemini
+    # -----------------------------------------------------
 
     try:
         with urlopen(
             request,
             timeout=120,
         ) as response:
+
             response_data = json.loads(
                 response.read().decode(
                     "utf-8"
@@ -133,30 +180,86 @@ ANSWER:
             )
 
     except HTTPError as error:
+
+        try:
+            error_body = error.read().decode(
+                "utf-8",
+                errors="replace",
+            )
+        except Exception:
+            error_body = ""
+
         raise RuntimeError(
-            f"Ollama request failed with HTTP "
-            f"{error.code}."
+            "Gemini request failed with HTTP "
+            f"{error.code}: {error_body[:1000]}"
         ) from error
 
     except URLError as error:
+
         raise RuntimeError(
-            "Could not connect to Ollama. "
-            "Make sure Ollama is running."
+            "Could not connect to the Gemini API. "
+            "Please check the backend network connection."
+        ) from error
+
+    except TimeoutError as error:
+
+        raise RuntimeError(
+            "Gemini API request timed out."
         ) from error
 
     except json.JSONDecodeError as error:
+
         raise RuntimeError(
-            "Ollama returned an invalid response."
+            "Gemini returned an invalid response."
         ) from error
 
-    answer = response_data.get(
-        "response",
-        ""
+    # -----------------------------------------------------
+    # Extract Gemini response
+    # -----------------------------------------------------
+
+    candidates = response_data.get(
+        "candidates",
+        [],
+    )
+
+    if not candidates:
+        raise RuntimeError(
+            "Gemini returned no response candidates."
+        )
+
+    candidate = candidates[0]
+
+    content = candidate.get(
+        "content",
+        {},
+    )
+
+    parts = content.get(
+        "parts",
+        [],
+    )
+
+    answer_parts = []
+
+    for part in parts:
+
+        text = part.get(
+            "text",
+            "",
+        )
+
+        if text:
+            answer_parts.append(
+                text
+            )
+
+    answer = "\n".join(
+        answer_parts
     ).strip()
 
     if not answer:
         raise RuntimeError(
-            "Ollama returned an empty response."
+            "Gemini returned an empty response."
         )
 
     return answer
