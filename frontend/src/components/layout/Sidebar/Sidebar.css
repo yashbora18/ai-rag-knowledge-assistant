@@ -1081,3 +1081,48 @@
     width: 100%;
   }
 }
+
+/* =========================================
+   LOGOUT MODAL - LIGHT MODE FIX
+   ========================================= */
+
+[data-theme="light"] .logout-modal {
+  background: #ffffff;
+  color: #17213a;
+  border-color: #dce3f0;
+  box-shadow:
+    0 24px 70px rgba(30, 41, 59, 0.20),
+    0 0 0 1px rgba(139, 92, 246, 0.04);
+}
+
+[data-theme="light"] .logout-modal h2 {
+  color: #17213a;
+}
+
+[data-theme="light"] .logout-modal p {
+  color: #687792;
+}
+
+[data-theme="light"] .logout-modal__close {
+  background: #ffffff;
+  color: #73809a;
+  border-color: #dce3f0;
+}
+
+[data-theme="light"] .logout-modal__close:hover {
+  background: #f4f6fb;
+  color: #17213a;
+  border-color: #c9d2e3;
+}
+
+[data-theme="light"] .logout-modal__cancel {
+  background: #f4f6fb;
+  border-color: #dce3f0;
+  color: #52617b;
+}
+
+[data-theme="light"] .logout-modal__cancel:hover {
+  background: #eaeef6;
+  border-color: #cbd5e5;
+  color: #17213a;
+}
