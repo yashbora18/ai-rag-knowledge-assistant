@@ -2127,3 +2127,19 @@
     display: block;
   }
 }
+
+/* =========================================
+   LIGHT MODE - ACTIVE NAVIGATION
+   ========================================= */
+
+[data-theme="light"] .navbar__link--active {
+  color: #172033;
+}
+
+[data-theme="light"] .navbar__links a.active {
+  color: #172033;
+}
+
+[data-theme="light"] .navbar__links a.active:hover {
+  color: #172033;
+}
