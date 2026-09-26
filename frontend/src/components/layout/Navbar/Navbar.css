@@ -2115,3 +2115,15 @@
   border-top-color: #e2e8f0;
   color: #475569;
 }
+
+/* Mobile notification popup is hidden on desktop */
+.navbar__mobile-notifications {
+  display: none;
+}
+
+/* Show mobile notification popup only on mobile */
+@media (max-width: 760px) {
+  .navbar__mobile-notifications {
+    display: block;
+  }
+}
